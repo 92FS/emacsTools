@@ -1,8 +1,8 @@
 ;;John M. Toniolo emacs init file
 
-;;this adds melpa which enables M-x customize-themes to open a menu with some custom themesx
+;;this adds melpa which enables M-x customize-themes to open a menu with some custom themes
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "://melpa.org/packages/")t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-refresh-contents)
 (package-initialize)
 
@@ -44,6 +44,7 @@
 ;;line numbers enabled
 (global-linum-mode t)
 ;; highlight words
+;;from: idle-highlight-mode package
 (add-hook 'prog-mode-hook (lambda () (idle-highlight-mode t)))
 
 ;; scroll two lines at a time (less "jumpy" than defaults)
@@ -55,6 +56,7 @@
 (setq show-paren-delay 0)
 (show-paren-mode 1)
 ;;autcomplete
+;;from: auto-complete package
 (ac-config-default)
 ;;if no style is manually selected
 ;;indentation style is
@@ -63,5 +65,6 @@
 ;;1234for()
 ;;}
 (setq c-default-style "bsd"
-  c-basic-offset 4)
+      c-basic-offset 4)
+
 ;;end doc

@@ -1,4 +1,3 @@
-;;John M. Toniolo emacs init file
 
 ;;this adds melpa which enables M-x customize-themes to open a menu with some custom themes
 (require 'package)

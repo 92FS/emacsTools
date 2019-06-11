@@ -26,14 +26,11 @@
 (setq visible-bell 1)
 ;;inserts right delimeters, So typing '(' produces '()'
 (electric-pair-mode 1)
-(add-hook 'C++-mode-hook
-              (lambda ()
-                (define-key python-mode-map "\"" 'electric-pair)
-                (define-key python-mode-map "\'" 'electric-pair)
-                (define-key python-mode-map "(" 'electric-pair)
-                (define-key python-mode-map "[" 'electric-pair)
-                (define-key python-mode-map "{" 'electric-pair)))
-
+;;highlights all file changes untill save and refresh
+(global-highlight-changes-mode 1)
+;;show changes with f6
+;; toggle visibility
+(global-set-key (kbd "<f6>")      'highlight-changes-visible-mode) ;; changes
 ;;Allows side scroller on mouse to work
 (setq mouse-wheel-tilt-scroll 1)
 ;; no backup files (eg main.cpp~)
@@ -45,7 +42,6 @@
 ;; highlight words
 ;;from: idle-highlight-mode package
 (add-hook 'prog-mode-hook (lambda () (idle-highlight-mode t)))
-
 ;; scroll two lines at a time (less "jumpy" than defaults)
 ;; two lines at a time
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 2)))
@@ -59,7 +55,7 @@
 (ac-config-default)
 ;;if no style is manually selected
 ;;indentation style is
-;;for())
+;;for()
 ;;{
 ;;1234for()
 ;;}

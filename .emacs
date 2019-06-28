@@ -61,5 +61,6 @@
 ;;}
 (setq c-default-style "bsd"
       c-basic-offset 4)
+(setq-default indent-tabs-mode nil)
 
 ;;end doc

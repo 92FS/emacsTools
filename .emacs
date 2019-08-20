@@ -1,9 +1,21 @@
 
-;;this adds melpa which enables M-x customize-themes to open a menu with some custom themes
+;;(package-refresh-contents)
+
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(package-refresh-contents)
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
+
+;; expand region and keyboard macro
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+(require 'auto-complete)
+(require 'idle-highlight-mode)
+
+;; mouse functionality
+(global-set-key (kbd "<mouse-4>") 'next-buffer)
+(global-set-key (kbd "<mouse-5>") 'previous-buffer)
+(setq mouse-wheel-tilt-scroll 1)
 
 (set-keyboard-coding-system nil)
 (custom-set-variables
@@ -13,7 +25,9 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes (quote (misterioso)))
  '(global-ede-mode t)
- '(package-selected-packages (quote (idle-highlight-mode auto-complete))))
+ '(package-selected-packages
+   (quote
+    (gnu-elpa-keyring-update expand-region idle-highlight-mode auto-complete))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -28,11 +42,9 @@
 (electric-pair-mode 1)
 ;;highlights all file changes untill save and refresh
 (global-highlight-changes-mode 1)
-;;show changes with f6
-;; toggle visibility
+;; show changes with f6
+;; "toggle visibility"
 (global-set-key (kbd "<f6>")      'highlight-changes-visible-mode) ;; changes
-;;Allows side scroller on mouse to work
-(setq mouse-wheel-tilt-scroll 1)
 ;; no backup files (eg main.cpp~)
 (setq make-backup-files nil)
 ;;turns off line wrapping
@@ -40,13 +52,15 @@
 ;;line numbers enabled
 (global-linum-mode t)
 ;; highlight words
-;;from: idle-highlight-mode package
+;; from: idle-highlight-mode package
 (add-hook 'prog-mode-hook (lambda () (idle-highlight-mode t)))
 ;; scroll two lines at a time (less "jumpy" than defaults)
 ;; two lines at a time
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 2)))
 ;; don't accelerate scrolling
 (setq mouse-wheel-progressive-speed nil)
+;;do not display start screen
+(setq inhibit-startup-screen t)
 ;;highlight the matching delimeter after 0 seconds
 (setq show-paren-delay 0)
 (show-paren-mode 1)
@@ -54,13 +68,16 @@
 ;;from: auto-complete package
 (ac-config-default)
 ;;if no style is manually selected
-;;indentation style is
-;;for()
-;;{
-;;1234for()
-;;}
+;;4 spaces for tabs
 (setq c-default-style "bsd"
       c-basic-offset 4)
+;; 4 spaces are used rather than a tab character
 (setq-default indent-tabs-mode nil)
+;;Last copies text is stored right before the last killed text in the kill ring
+;;i.e. copy > kill > C-y > M-y pastes last copied text even after you kill some text
+(setq save-interprogram-paste-before-kill t)
 
 ;;end doc
+
+
+
